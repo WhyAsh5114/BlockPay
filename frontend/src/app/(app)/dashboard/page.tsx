@@ -135,7 +135,7 @@ function GasPriceComparison() {
   }, [ethData, polygonData, arbitrumData]);
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-4">
       <div className="flex flex-col gap-6">
         <div className="space-y-1">
           <h2 className="text-2xl font-bold tracking-tight">Gas Price Comparison</h2>

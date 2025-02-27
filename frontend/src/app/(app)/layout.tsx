@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { Toaster } from "sonner";
 import { cookieToInitialState } from "wagmi";
 import { Providers } from "../providers";
+import { DockDemo } from "@/components/BottomDock";
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   const initialState = cookieToInitialState(
@@ -15,15 +16,8 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <Providers initialState={initialState}>
-      <SidebarProvider>
-        <AppSidebar />
-        <div className="w-full flex flex-col">
-          <header className="h-12 flex items-center px-4">
-            <SidebarTrigger />
-          </header>
-          <main className="p-4 space-y-4">{children}</main>
-        </div>
-      </SidebarProvider>
+      <main className="p-4 space-y-4">{children}</main>
+      <DockDemo />
       <Toaster />
     </Providers>
   );
