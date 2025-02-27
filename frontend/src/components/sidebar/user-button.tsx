@@ -1,14 +1,14 @@
 "use client";
 
-import { ChevronUp, LoaderCircle, User2, Wallet } from "lucide-react";
+import { ChevronDown, LoaderCircle, User2, Wallet } from "lucide-react";
 import { useAccount, useConnect, useDisconnect, useEnsName } from "wagmi";
+import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { SidebarMenuButton } from "../ui/sidebar";
 
 export function UserButton() {
   const account = useAccount();
@@ -18,9 +18,9 @@ export function UserButton() {
 
   if (account.status === "connecting") {
     return (
-      <SidebarMenuButton disabled>
+      <Button disabled>
         <LoaderCircle className="animate-spin" /> Connecting
-      </SidebarMenuButton>
+      </Button>
     );
   }
 
@@ -28,9 +28,9 @@ export function UserButton() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <SidebarMenuButton>
+          <Button>
             <Wallet /> Connect wallet
-          </SidebarMenuButton>
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           side="top"
@@ -52,11 +52,11 @@ export function UserButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <SidebarMenuButton>
+        <Button className="w-48 mx-auto">
           <User2 />{" "}
           <span className="truncate">{ensName ?? account.address}</span>
-          <ChevronUp className="ml-auto" />
-        </SidebarMenuButton>
+          <ChevronDown className="ml-auto" />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         side="top"

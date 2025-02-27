@@ -1,10 +1,11 @@
 "use client";
 
-import { useEstimateFeesPerGas } from "wagmi";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { UserButton } from "@/components/sidebar/user-button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useEstimateFeesPerGas } from "wagmi";
 
 const GWEI_TO_ETH = 1e-9;
 
@@ -183,6 +184,7 @@ function GasPriceComparison() {
 function App() {
   return (
     <>
+      <UserButton />
       <GasPriceComparison />
     </>
   );

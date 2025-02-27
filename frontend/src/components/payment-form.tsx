@@ -34,9 +34,10 @@ export default function PaymentForm({ _contacts }: { _contacts: Contact[] }) {
         setShowMoonpay(true)
     }
 
+
     return (
         <>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            {<form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                     <Label htmlFor="contact">Send to</Label>
                     <Select
@@ -72,15 +73,19 @@ export default function PaymentForm({ _contacts }: { _contacts: Contact[] }) {
                 <Button type="submit" className="w-full">
                     Send payment
                 </Button>
-            </form>
+            </form>}
 
             {showMoonpay && (
-                <MoonPayBuyWidget
-                    variant="embedded"
-                    baseCurrencyCode="eth"
-                    baseCurrencyAmount={(amount)}
-                    walletAddress={contacts.find(c => c.contactWith === selectedContact)?.contactWith}
-                />
+                <div className="-ml-4">
+                    <MoonPayBuyWidget
+                        variant="overlay"
+                        baseCurrencyCode="usd"
+                        baseCurrencyAmount={(amount)}
+                        currencyCode='usdc'
+                        onClose={async () => setShowMoonpay(false)}
+                        walletAddress={contacts.find(c => c.contactWith === selectedContact)?.contactWith}
+                    />
+                </div>
             )}
         </>
     )
