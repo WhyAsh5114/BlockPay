@@ -17,8 +17,8 @@ model Payment {
   fromAddress String
   toAddress   String
   amount      Float
-  hash        String   @id
   createdAt   DateTime @default(now())
+  id          String   @id @default(cuid())
 }
 
 model Contact {
