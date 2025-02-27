@@ -16,9 +16,11 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
 
   return (
     <Providers initialState={initialState}>
-      <main className="p-4 space-y-4">{children}</main>
-      <DockDemo />
-      <Toaster />
+      <div className="relative min-h-screen flex flex-col">
+        <main className="flex-grow p-4 space-y-4">{children}</main>
+        <DockDemo />
+        <Toaster />
+      </div>
     </Providers>
   );
 }

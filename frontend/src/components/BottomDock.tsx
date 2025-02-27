@@ -8,7 +8,7 @@ export type IconProps = React.HTMLAttributes<SVGElement>;
 
 export function DockDemo() {
   return (
-    <div className="relative">
+    <div className="relative mb-4">
       <Dock direction="middle">
         <DockIcon>
           <House className="size-6" />
