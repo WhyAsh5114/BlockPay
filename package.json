@@ -5,5 +5,9 @@
   "workspaces": [
     "blockchain",
     "frontend"
-  ]
+  ],
+  "dependencies": {
+    "@moonpay/moonpay-js": "^0.6.6",
+    "@moonpay/moonpay-react": "^1.8.10"
+  }
 }

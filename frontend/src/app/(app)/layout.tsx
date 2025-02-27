@@ -1,5 +1,4 @@
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { MoonPayProvider } from '@moonpay/moonpay-react';
 import getConfig from "next/config";
 import { headers } from "next/headers";
 import { ReactNode } from "react";
