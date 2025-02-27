@@ -4,7 +4,8 @@ import prisma from "@/lib/prisma";
 
 export async function CreateContactAction(formData: FormData) {
 
-  const contactOf = formData.get("contactOf")?? "enter id";
+  const contactOf = formData.get("contactOf") as string;
+  const contactWith = formData.get("contactWith") as string;
   const name = formData.get("name") as string;
 
   try {
@@ -12,7 +13,7 @@ export async function CreateContactAction(formData: FormData) {
       data: {
         contactOf: contactOf,
         name: name,
-        contactWith: "enter id",
+        contactWith
       },
     });
     return {

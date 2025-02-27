@@ -1,11 +1,13 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2, UserPlus, X } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, UserPlus, X } from "lucide-react";
 
+import { CreateContactAction } from "@/app/actions/create-contact";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,9 +18,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { CreateContactAction } from "@/app/actions/create-contact";
+import { useAccount } from "wagmi";
 
 const contactFormSchema = z.object({
   contactWith: z.string().min(1, "Contact Address is required"),
@@ -35,7 +35,8 @@ const defaultValues: Partial<ContactFormValues> = {
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recentContacts, setRecentContacts] = useState<ContactFormValues[]>([]);
-
+  const { address } = useAccount();
+  
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues,
@@ -50,6 +51,7 @@ export default function ContactForm() {
     const formData = new FormData();
     formData.append("contactWith", form.getValues("contactWith"));
     formData.append("name", form.getValues("name"));
+    formData.append("contactOf", address!)
 
     const response = await createContact(formData);
     console.log(response);
