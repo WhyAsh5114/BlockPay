@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { useAccount } from "wagmi";
+import { redirect } from "next/navigation";
 
 const contactFormSchema = z.object({
   contactWith: z.string().min(1, "Contact Address is required"),
@@ -28,16 +29,13 @@ const contactFormSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
-const defaultValues: Partial<ContactFormValues> = {
-  contactWith: "",
-  name: "",
-};
+const defaultValues: Partial<ContactFormValues> = { contactWith: "", name: "" };
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [recentContacts, setRecentContacts] = useState<ContactFormValues[]>([]);
   const { address } = useAccount();
-  
+
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues,
@@ -55,10 +53,12 @@ export default function ContactForm() {
     if (!address) {
       return toast.error("Connect wallet to add contact");
     }
-    formData.append("contactOf", address!)
+    formData.append("contactOf", address!);
 
+    setIsSubmitting(true);
     const response = await createContact(formData);
-    console.log(response);
+    setIsSubmitting(false);
+    redirect("/contacts");
   }
 
   function getInitials(name: string) {

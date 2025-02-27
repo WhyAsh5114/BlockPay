@@ -38,7 +38,7 @@ export default function PaymentForm({ _contacts }: { _contacts: Contact[] }) {
   return (
     <>
       {
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 bg-secondary p-4 rounded-lg">
           <div>
             <Label htmlFor="contact">Send to</Label>
             <Select value={selectedContact} onValueChange={setSelectedContact}>
