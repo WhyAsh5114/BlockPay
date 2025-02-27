@@ -12,3 +12,19 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Payment {
+  fromAddress String
+  toAddress   String
+  amount      Float
+  hash        String   @id
+  createdAt   DateTime @default(now())
+}
+
+model Contact {
+  contactOf   String
+  contactWith String
+  name        String
+
+  @@id([contactOf, contactWith])
+}
