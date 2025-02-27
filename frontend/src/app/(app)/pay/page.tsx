@@ -1,26 +1,13 @@
-"use client";
+import PaymentForm from '@/components/payment-form';
+import prisma from '@/lib/prisma';
 
-import TypographyH2 from "@/components/typography/h2";
-import dynamic from "next/dynamic";
-import { useState } from "react";
+export default async function PayPage() {
+    const contacts = await prisma.contact.findMany()
 
-const MoonPayBuyWidget = dynamic(
-    () => import('@moonpay/moonpay-react').then((mod) => mod.MoonPayBuyWidget),
-    { ssr: false },
-);
-
-export default function PayPage() {
-    const [walletAddress, setWalletAddress] = useState<string>();
-
-    return <>
-        <TypographyH2>Pay to contacts</TypographyH2>
-        <MoonPayBuyWidget
-            variant="overlay"
-            baseCurrencyCode="usd"
-            baseCurrencyAmount="100"
-            defaultCurrencyCode="usdc"
-            walletAddress={walletAddress}
-            visible={walletAddress !== undefined}
-        />
-    </>
+    return (
+        <div className="max-w-md mx-auto p-4">
+            <h1 className="text-2xl font-bold mb-6">Send Payment</h1>
+            <PaymentForm _contacts={contacts} />
+        </div>
+    )
 }
