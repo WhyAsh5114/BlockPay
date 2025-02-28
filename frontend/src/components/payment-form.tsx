@@ -51,7 +51,7 @@ export default function PaymentForm({ _contacts }: { _contacts: Contact[] }) {
                     key={contact.contactWith}
                     value={contact.contactWith}
                   >
-                    {contact.name} ({contact.contactWith})
+                    {contact.name}
                   </SelectItem>
                 ))}
               </SelectContent>
