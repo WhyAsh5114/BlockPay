@@ -17,7 +17,6 @@ interface TransactionProps {
     fromAddress: string;
     toAddress: string;
     amount: number;
-    hash: string;
     createdAt: Date;
   };
   isOutgoing: boolean;
@@ -97,34 +96,6 @@ export function TransactionItem({
                 })}
               </p>
             </div>
-          </div>
-
-          <div className="mt-2 pt-2 border-t border-gray-700 text-xs text-gray-500 flex items-center">
-            <span className="mr-1">Tx:</span>
-            <span>{truncateAddress(transaction.hash)}</span>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button
-                    onClick={() => copyToClipboard(transaction.hash)}
-                    className="ml-1 text-gray-500 hover:text-gray-300"
-                  >
-                    <Copy className="h-3 w-3" />
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{copied ? "Copied!" : "Copy transaction hash"}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <a
-              href={`https://etherscan.io/tx/${transaction.hash}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-auto text-gray-500 hover:text-gray-300"
-            >
-              <ExternalLink className="h-3 w-3" />
-            </a>
           </div>
         </div>
       </div>
